@@ -1,179 +1,658 @@
-# REPOLENS
+# RepoLens
 
-GitHub Repository Evolution & Analytics Platform — sign up, connect GitHub,
-analyze any repository (including your own private ones), and explore its
-commits, contributors, languages, activity heatmap, timeline, file history,
-and travel back to any point in its past.
+### GitHub Repository Evolution & Analytics Platform
 
-**Stack:** React (Vite) + Tailwind + Recharts + React Router · Node.js/Express
-· MongoDB/Mongoose · GitHub REST API · GitHub OAuth · JWT + bcrypt · Swagger/OpenAPI
+RepoLens is a full-stack MERN application that helps developers understand how a GitHub repository evolves over time.
 
-## Structure
+Users can connect their GitHub account, analyze repositories, and explore commits, contributors, languages, activity patterns, timelines, file history, and repository evolution.
 
+---
+
+## 🚀 Features
+
+* 🔐 User Authentication
+
+  * Signup and Login
+  * JWT-based authentication
+  * Password hashing with bcrypt
+  * Forgot and Reset Password flow
+
+* 🐙 GitHub Integration
+
+  * GitHub OAuth authentication
+  * Connect GitHub account
+  * Analyze GitHub repositories
+  * Support for public and authorized private repositories
+
+* 📊 Repository Analytics
+
+  * Repository overview
+  * Commit statistics
+  * Contributor analysis
+  * Programming language distribution
+  * Repository activity
+  * Activity heatmap
+  * Timeline visualization
+
+* 🕐 Repository Evolution
+
+  * Explore repository history
+  * Browse commits
+  * View file changes
+  * Track repository evolution
+  * Compare repository states
+  * Inspect historical snapshots
+
+* 📁 File & Commit Exploration
+
+  * File tree
+  * Commit details
+  * File history
+  * Changes across commits
+
+* 📈 Visualizations
+
+  * Interactive charts
+  * Commit activity graphs
+  * Language charts
+  * Contributor statistics
+  * Repository timeline
+
+* 🔗 Sharing
+
+  * Save repository analyses
+  * Share analysis pages
+  * Public share links
+
+* 📱 Responsive UI
+
+  * GitHub-inspired interface
+  * Desktop navigation
+  * Mobile hamburger menu
+  * Responsive dashboard
+
+* 📚 API Documentation
+
+  * Swagger/OpenAPI documentation
+  * RESTful backend APIs
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* React.js
+* Vite
+* Tailwind CSS
+* React Router
+* Recharts
+* Axios
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT
+* bcrypt
+
+### APIs & Authentication
+
+* GitHub REST API
+* GitHub OAuth
+* JWT Authentication
+
+### Documentation & Testing
+
+* Swagger / OpenAPI
+* Postman
+* Jest / Supertest
+
+---
+
+## 📂 Project Structure
+
+```text
+RepoLens/
+│
+├── CodeTimeMachine/
+│   │
+│   ├── backend/
+│   │   ├── src/
+│   │   │   ├── config/
+│   │   │   ├── controllers/
+│   │   │   ├── middleware/
+│   │   │   ├── models/
+│   │   │   ├── routes/
+│   │   │   ├── services/
+│   │   │   └── app.js
+│   │   │
+│   │   ├── tests/
+│   │   ├── .env.example
+│   │   ├── Dockerfile
+│   │   └── package.json
+│   │
+│   ├── frontend/
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   │   ├── context/
+│   │   │   ├── pages/
+│   │   │   ├── App.jsx
+│   │   │   └── main.jsx
+│   │   │
+│   │   ├── public/
+│   │   ├── .env.example
+│   │   └── package.json
+│   │
+│   ├── render.yaml
+│   └── README.md
 ```
-CodeTimeMachine/
-├── backend/
-│   ├── config/            db.js, swagger.js
-│   ├── models/            User, Repository, Commit, Contributor, SavedAnalysis, Share
-│   ├── services/          githubService.js — all GitHub REST API calls (per-user token aware)
-│   ├── controllers/       authController, repoController, shareController, healthController
-│   ├── routes/            authRoutes, repoRoutes, shareRoutes, healthRoutes (with OpenAPI JSDoc)
-│   ├── middleware/        errorHandler, auth (protect), optionalAuth, rateLimiter
-│   ├── tests/             example Jest + Supertest tests
-│   ├── Dockerfile, render.yaml
-│   └── server.js
-└── frontend/
-    └── src/
-        ├── pages/          Landing, Login, Signup, Forgot/Reset Password, OAuthSuccess,
-        │                    DashboardHome, Analyze, Profile, Settings, Share, NotFound,
-        │                    + per-repo pages: Overview, Commits, CommitDetail, Timeline,
-        │                      Analytics, Files, Compare
-        ├── layouts/         DashboardLayout (sidebar), RepoLayout (tab nav)
-        ├── context/         AuthContext, ToastContext, ThemeContext, NotificationContext
-        ├── components/      ProtectedRoute, Sidebar, CommandPalette, NotificationBell,
-        │                    StatCard, LanguageBar, Heatmap, TimeTravelSlider (with playback),
-        │                    LoadingSkeleton, EmptyState, ErrorState
-        ├── vercel.json
-        └── services/        api.js, authService.js, repoService.js
+
+---
+
+## 🧩 Main Frontend Pages
+
+```text
+LandingPage
+LoginPage
+SignupPage
+ForgotPasswordPage
+ResetPasswordPage
+OAuthSuccessPage
+
+DashboardHomePage
+DashboardPage
+AnalyzePage
+ProfilePage
+SettingsPage
+SharePage
+
+AnalyticsPage
+CommitsPage
+CommitDetailPage
+ContributorsPage
+ComparePage
+FilesPage
+TimelinePage
+
+NotFoundPage
 ```
 
-## Setup
+---
 
-### 1. Backend
+## 🗄️ Database Models
+
+RepoLens uses MongoDB with Mongoose.
+
+Main models include:
+
+```text
+User
+Repository
+Commit
+Contributor
+SavedAnalysis
+Share
+```
+
+These models are used to manage authentication, repository information, commit data, contributors, saved analyses, and shared repository views.
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Sidd13789/REPOLENS.git
+cd REPOLENS/CodeTimeMachine
+```
+
+---
+
+## 🔧 Backend Setup
+
+Move into the backend directory:
 
 ```bash
 cd backend
-npm install
-cp  .env
 ```
 
-Fill in `.env` — see the table below. At minimum: `MONGO_URI` and `JWT_SECRET`.
+Install dependencies:
 
 ```bash
-npm run dev      # start the API on :7000
-npm test         # run the example test suite
+npm install
 ```
 
-API docs (Swagger UI): `http://localhost:7000/api/docs`
+Create your environment file:
 
-### 2. Frontend
+### Windows PowerShell
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### macOS / Linux
 
 ```bash
-cd frontend
-npm install
 cp .env.example .env
+```
+
+Configure the required environment variables inside `.env`.
+
+Example:
+
+```env
+PORT=7000
+
+MONGO_URI=mongodb://127.0.0.1:27017/codetimemachine
+
+JWT_SECRET=your_jwt_secret
+
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+
+FRONTEND_URL=http://localhost:5173
+```
+
+Start the backend:
+
+```bash
 npm run dev
 ```
 
-Open `http://localhost:5173`. Sign up with email/password (or GitHub), then
-analyze a repo from the dashboard. Press **⌘K / Ctrl+K** anywhere in the
-dashboard for the command palette.
+Backend runs on:
 
-### 3. GitHub OAuth + private repos (optional but recommended)
+```text
+http://localhost:7000
+```
 
-1. Create an OAuth app at https://github.com/settings/developers.
-2. Callback URL: `http://localhost:7000/api/auth/github/callback`.
-3. Put the client ID/secret in `backend/.env` (`GITHUB_CALLBACK_URL` must match
-   exactly). The OAuth scope requested is `read:user user:email repo`, so a
-   user who signs in with GitHub can analyze their own private repositories —
-   the Analyze page will list their repos (with a "private" tag) once
-   connected, and the backend transparently uses their token instead of the
-   app-level `GITHUB_TOKEN` for any repo they can access.
+---
 
-### 4. Password resets in development
+## 💻 Frontend Setup
 
-No email service is wired up. `POST /api/auth/forgot-password` logs the reset
-link to the backend console and — outside `NODE_ENV=production` — also
-returns it in the response body (`devResetUrl`), which the frontend displays
-directly. Swap in a real provider (Resend, SendGrid, SES) before deploying.
+Open another terminal:
 
-## What's implemented
+```bash
+cd frontend
+```
 
-- **Auth:** email/password signup+login (bcrypt + JWT), GitHub OAuth login,
-  forgot/reset password, protected frontend routes + `protect`/`optionalAuth`
-  backend middleware.
-- **Private repository support:** each user's GitHub access token (from
-  OAuth) is used for their own requests, so private repos they can access on
-  GitHub work here too; `GET /api/repos/meta/my-repos` lists their repos
-  (public + private) for the Analyze page's picker.
-- **Dashboard:** sidebar nav, stats, saved analyses (with remove), a
-  notification bell, and a command palette (⌘K) for quick navigation +
-  theme toggle + logout.
-- **Repository analysis:** analyze → cached in MongoDB → overview, commits
-  (author filter + pagination), commit detail with file diffs, month-grouped
-  timeline, analytics (Recharts: commits-over-time, additions/deletions,
-  contributor activity), GitHub-style commit heatmap, file explorer +
-  per-file history, structure-at-date, **time travel** with a manual slider
-  *and* an auto-play "▶ Play Evolution" button, version comparison between
-  two dates.
-- **Sharing:** public `/share/:id` link, no login required to view.
-- **Caching & sync:** repo metadata auto-refreshes hourly; `POST
-  /api/repos/:owner/:repo/sync` incrementally pulls only new commits.
-- **Rate limit awareness:** `GET /api/repos/meta/rate-limit` reflects the
-  requesting user's own quota when they're signed in with GitHub.
-- **API docs:** interactive Swagger UI at `/api/docs`, generated from JSDoc
-  comments on the main routes (auth, analyze, commits, snapshot, compare —
-  the rest of the routes are implemented but not yet individually annotated).
-- **Hardening:** rate limiting (general + stricter on auth), consistent
-  `{ success, message }` errors, structured logging that never logs secrets,
-  indexes on the hot lookup fields, example Jest/Supertest tests.
-- **Frontend polish:** dark/light theme toggle (Settings page or via the
-  command palette) applied to the shell — sidebar, dashboard layout, repo
-  tab layout, landing/login/signup; toast notifications; loading skeletons;
-  empty/error states; 404 page.
-- **Deployment configs:** `frontend/vercel.json`, `backend/render.yaml`,
-  `backend/Dockerfile`.
+Install dependencies:
 
-## Known limitations / good next steps
+```bash
+npm install
+```
 
-- **Theme toggle coverage:** the light palette is wired up for the shell
-  (sidebar, layouts, landing/login/signup) but the inner repository pages
-  (Commits, Analytics, Files, Compare, etc.) still use hardcoded dark
-  Tailwind classes — they'll look dark even when the theme is set to light.
-  Retrofitting every page is mechanical (swap `bg-gray-900` → `bg-gray-50
-  dark:bg-gray-900`-style pairs) but wasn't done for all ~15 of them yet.
-- **Swagger annotations** cover the highest-traffic endpoints, not literally
-  every route — the routes all work, just not all documented in `/api/docs`.
-- **Test coverage** is example-level (`parseRepoUrl`, `/api/health`), not a
-  full suite across every controller — most controllers need a test database
-  to exercise meaningfully.
-- **Language history in `/compare`** still reflects *current* language
-  percentages (GitHub's API has no historical language endpoint).
-- **Timeline** is derived by grouping commits into months rather than reading
-  tags/releases — works for every repo, including ones with no releases.
+Create the environment file:
 
-## API Documentation
+### Windows PowerShell
 
-Once the backend is running: `http://localhost:7000/api/docs`
+```powershell
+Copy-Item .env.example .env
+```
 
-## Environment Variables
+### macOS / Linux
 
-**backend/.env**
+```bash
+cp .env.example .env
+```
 
-| Variable | Required for | Description |
-|---|---|---|
-| `PORT` | always | Backend port (default 7000) |
-| `MONGO_URI` | always | MongoDB connection string |
-| `CLIENT_URL` | always | Frontend origin — CORS + OAuth/reset-password redirects |
-| `JWT_SECRET` | always | Signs auth tokens |
-| `GITHUB_TOKEN` | recommended | App-level fallback token, raises anonymous rate limit to 7000/hr |
-| `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` / `GITHUB_CALLBACK_URL` | GitHub login + private repos | From your GitHub OAuth App |
+Start the frontend:
 
-**frontend/.env**
+```bash
+npm run dev
+```
 
-| Variable | Description |
-|---|---|
-| `VITE_API_URL` | Backend base URL (defaults to `/api`, proxied to `localhost:7000` in dev) |
+Frontend runs on:
 
-## Deployment
+```text
+http://localhost:5173
+```
 
-- **Frontend → Vercel:** `frontend/vercel.json` handles SPA rewrites. Set
-  `VITE_API_URL` to your deployed backend's URL in Vercel's env settings.
-- **Backend → Render:** `backend/render.yaml` is a Render Blueprint — import
-  the repo in Render and fill in the `sync: false` env vars in the dashboard.
-- **Backend → Docker (Railway, Fly, anywhere):** `backend/Dockerfile` builds
-  a production image; pass the same env vars as above at runtime.
-- **Database → MongoDB Atlas:** create a free cluster, put its connection
-  string in `MONGO_URI`.
-- After deploying, update your GitHub OAuth app's callback URL to the
-  production backend's `/api/auth/github/callback`.
+---
+
+## 🐙 GitHub OAuth Setup
+
+RepoLens supports GitHub OAuth authentication.
+
+Create a GitHub OAuth application and configure the callback URL as:
+
+```text
+http://localhost:7000/api/auth/github/callback
+```
+
+The application requires the following GitHub OAuth scopes:
+
+```text
+read:user
+user:email
+repo
+```
+
+The `repo` scope is required when accessing repositories that the authenticated GitHub account is authorized to access.
+
+Add your GitHub credentials to the backend `.env` file:
+
+```env
+GITHUB_CLIENT_ID=your_client_id
+GITHUB_CLIENT_SECRET=your_client_secret
+```
+
+---
+
+## 🔐 Authentication Flow
+
+RepoLens uses JWT-based authentication.
+
+```text
+User
+ │
+ ├── Signup
+ │      ↓
+ │   Password Hashing
+ │      ↓
+ │   MongoDB
+ │
+ ├── Login
+ │      ↓
+ │   JWT Token
+ │      ↓
+ │   Authenticated Requests
+ │
+ └── GitHub OAuth
+        ↓
+   GitHub Authorization
+        ↓
+   OAuth Callback
+        ↓
+   User Authentication
+```
+
+---
+
+## 🔄 Repository Analysis Flow
+
+```text
+User
+  ↓
+Login / GitHub OAuth
+  ↓
+Enter GitHub Repository
+  ↓
+Backend
+  ↓
+GitHub REST API
+  ↓
+Fetch Repository Data
+  ↓
+Store / Process Data
+  ↓
+Analytics APIs
+  ↓
+React Dashboard
+  ↓
+Charts + Timeline + Repository Evolution
+```
+
+---
+
+## 📊 Repository Analytics
+
+RepoLens provides different analytical views of a repository:
+
+### Commits
+
+Users can explore:
+
+* Commit history
+* Commit details
+* Commit timestamps
+* Commit authors
+* File changes
+
+### Contributors
+
+Users can inspect contributor activity and contribution statistics.
+
+### Languages
+
+The platform displays the programming languages used by a repository.
+
+### Activity Heatmap
+
+Repository activity can be explored through a GitHub-style activity heatmap.
+
+### Timeline
+
+The timeline provides a chronological view of repository development.
+
+---
+
+## 🕐 Repository Evolution
+
+One of RepoLens's main features is repository evolution analysis.
+
+Users can:
+
+1. Select a repository.
+2. Explore its commit history.
+3. Select historical points in time.
+4. Inspect repository state.
+5. Explore files and changes.
+6. Compare different repository states.
+
+This allows developers to understand how a codebase changed throughout its development.
+
+---
+
+## 🔍 Compare Repository States
+
+The comparison feature allows users to examine differences between selected repository states.
+
+The comparison can help identify:
+
+* Added files
+* Modified files
+* Deleted files
+* Changes between commits
+* Repository evolution over time
+
+---
+
+## 📮 API Testing with Postman
+
+Postman can be used to test the RepoLens backend REST APIs independently from the React frontend.
+
+Typical API flow:
+
+```text
+Signup
+  ↓
+Login
+  ↓
+Receive JWT
+  ↓
+Send JWT in Authorization Header
+  ↓
+Call Protected APIs
+```
+
+Example authorization header:
+
+```text
+Authorization: Bearer <JWT_TOKEN>
+```
+
+Postman is useful for testing:
+
+* Authentication APIs
+* Repository analysis APIs
+* Commit APIs
+* Contributor APIs
+* Timeline APIs
+* Analytics APIs
+* Share APIs
+* Health APIs
+
+---
+
+## 📚 API Documentation
+
+Swagger/OpenAPI documentation is available through the backend API documentation route.
+
+After starting the backend, open the configured Swagger documentation endpoint in your browser.
+
+The Swagger interface provides information about available API endpoints, request parameters, authentication, and responses.
+
+---
+
+## 🔑 Environment Variables
+
+### Backend
+
+```env
+PORT=
+MONGO_URI=
+JWT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+FRONTEND_URL=
+```
+
+### Frontend
+
+Configure the frontend environment variables according to the `.env.example` file included in the project.
+
+> Never commit `.env` files or API secrets to GitHub.
+
+---
+
+## 🧪 Testing
+
+Backend tests are located inside:
+
+```text
+backend/tests/
+```
+
+Run the configured test command:
+
+```bash
+npm test
+```
+
+---
+
+## 🐳 Docker
+
+The backend includes a Dockerfile for containerized deployment.
+
+Build the backend image:
+
+```bash
+docker build -t repolens-backend ./backend
+```
+
+Run the container:
+
+```bash
+docker run -p 7000:7000 repolens-backend
+```
+
+---
+
+## ☁️ Deployment
+
+The project contains deployment configuration through:
+
+```text
+render.yaml
+```
+
+For production deployment, configure:
+
+* MongoDB connection
+* JWT secret
+* GitHub OAuth credentials
+* Frontend URL
+* Backend URL
+* Environment variables
+
+GitHub OAuth callback URLs must also be updated to the production backend URL.
+
+---
+
+## ⚠️ Limitations
+
+* GitHub API rate limits apply.
+* Repository analysis depends on GitHub API availability.
+* Private repository access requires appropriate GitHub authorization.
+* Large repositories may require additional API requests and processing time.
+* OAuth configuration is required for GitHub account integration.
+
+---
+
+## 🔒 Security
+
+The application follows several security practices:
+
+* Passwords are hashed using bcrypt.
+* JWT is used for authenticated API requests.
+* Sensitive environment variables are stored outside source code.
+* `.env` files should not be committed.
+* GitHub OAuth credentials should remain private.
+* Protected API routes require authentication.
+
+---
+
+## 🎯 Use Cases
+
+RepoLens can be useful for:
+
+* Developers learning from open-source projects
+* Understanding the history of a codebase
+* Analyzing team contribution patterns
+* Exploring repository activity
+* Studying how projects evolve
+* Reviewing historical code changes
+* Understanding development timelines
+
+---
+
+## 🚀 Future Improvements
+
+Possible future improvements include:
+
+* Advanced code-change visualization
+* More detailed contributor analytics
+* AI-powered repository insights
+* Improved commit comparison
+* Advanced repository search
+* More GitHub activity metrics
+* Performance optimizations for large repositories
+* Additional repository providers
+
+---
+
+## 👨‍💻 Author
+
+**Siddhartha Dwivedi**
+
+B.Tech Computer Science & Engineering
+Specialization: Artificial Intelligence & Machine Learning
+
+GitHub: **Sidd13789**
+
+---
+
+## ⭐ Support
+
+If you find RepoLens useful, consider giving the repository a ⭐ on GitHub.
+
+---
+
+## 📄 License
+
+This project is intended for educational and portfolio purposes.
